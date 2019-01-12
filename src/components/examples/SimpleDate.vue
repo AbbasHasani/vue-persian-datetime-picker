@@ -1,7 +1,7 @@
 <template>
     <card title="Simple example">
 
-        <date-picker v-model="date" :clearable="true"></date-picker>
+        <date-picker v-model="date" :clearable="true" @changeMonth="changeMonths($event)"></date-picker>
         <br/>
         <date-picker v-model="datetime" type="datetime"></date-picker>
         <br/>
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import utils from './../../picker/modules/utils';
+const moment = utils.moment;
     export default {
         data() {
             return {
@@ -42,5 +44,10 @@
                 month: '',
             }
         },
+        methods:{
+            changeMonths:function(_data){
+                console.log(_data.format('jM'))
+            }
+        }
     }
 </script>
