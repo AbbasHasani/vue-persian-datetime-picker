@@ -982,7 +982,6 @@ tagData: { type: Array },
         for(var i=0; i< _value.length; i++){
           if(_value[i][moment(_d).unix()]){
             let returnValue = _value[i][moment(_d).unix()];
-            this.tagData.splice(i,1)
             return returnValue;
             break;
           }

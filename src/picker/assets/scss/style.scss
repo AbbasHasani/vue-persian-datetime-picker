@@ -186,6 +186,7 @@
 		}
 		.#{$prefix}day-text {
 			color: darken(#ffffff, 20%);
+			box-shadow: none;
 		}
 	}
 
@@ -196,12 +197,18 @@
 				transform: scale(1);
 				opacity: 0.6;
 			}
+			.#{$prefix}day-text {
+				box-shadow: none;
+			}
 		}
 		&.selected {
 			color: #ffffff;
 			.#{$prefix}day-effect {
 				transform: scale(1);
 				opacity: 1;
+			}
+			.#{$prefix}day-text {
+				box-shadow: none;
 			}
 		}
 	}
@@ -213,7 +220,7 @@
 	height: $day-size - 4px;
 	border-radius: 50%;
 	top: 2px;
-	left: 2px;
+    right: -2px;
 	transform: scale(0);
 	opacity: 0;
 	transition: all 450ms ease;
@@ -221,6 +228,12 @@
 
 .#{$prefix}day-text {
 	position: relative;
+	width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    display: block;
 }
 
 .#{$prefix}controls {
@@ -507,16 +520,20 @@
 
 
 span.hasTagData:after {
-    position: absolute;
-    min-width: 15px;
+	position: absolute;
+    min-width: 18px;
     height: 18px;
-    top: -4px;
-    left: -5px;
+    top: 0px;
+    left: 1px;
     background-color: red;
     content: attr(data-tagdata);
-    border-radius: 6px;
+    border-radius: 50%;
     line-height: 1;
-    padding: 4px 2px;
+    padding: 5px 2px;
     color: #fff;
     font-size: 10px;
+}
+
+.hasTagDatepicker .#{$prefix}day-text {
+    box-shadow: 0px 0px 2px #aaa;
 }

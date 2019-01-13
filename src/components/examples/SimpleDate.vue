@@ -1,7 +1,7 @@
 <template>
     <card title="Simple example">
 
-        <date-picker v-model="date" :clearable="true" :tagData="[{1547411400: 5}, {1545510600:18}]" :disable="['1397/10/23']" @changeMonth="changeMonths($event)"></date-picker>
+        <date-picker v-model="date" class="hasTagDatepicker" :clearable="true" :tagData="[{1547411400: 5}, {1545510600:18}]" :disable="['1397/10/23']" @changeMonth="changeMonths($event)"></date-picker>
         <br/>
         <date-picker v-model="datetime" type="datetime"></date-picker>
         <br/>
