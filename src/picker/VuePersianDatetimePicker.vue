@@ -728,6 +728,7 @@ export default {
       if (month.disabled) return;
       this.date.jMonth(month.jMonth());
       this.nextStep();
+      this.$emit('changeMonth', this.date.clone());
     },
     setTime (v, k) {
 
