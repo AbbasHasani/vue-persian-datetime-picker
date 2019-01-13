@@ -176,6 +176,7 @@
                                 :style="{'background-color': color}"
                               ></span>
                               <span :class="[prefix('day-text')]">{{ day.formatted }}</span>
+                              <span v-if="day.tagData" class="hasTagData" :data-tagdata="day.tagData"></span>
                             </template>
                           </div>
                         </div>
@@ -639,6 +640,10 @@ export default {
      * @version 1.1.6
      */
     inline: { type: Boolean, 'default': false },
+
+tagData: { type: Array },
+
+  
   },
   data () {
     return {
@@ -972,6 +977,19 @@ export default {
       if (item === 'y') value = moment(value, 'jYYYY');
       return check(value, value.format(this.selfFormat));
     },
+    checkTagData(_d, _value){
+      if(_value && _value.length){
+        for(var i=0; i< _value.length; i++){
+          if(_value[i][moment(_d).unix()]){
+            let returnValue = _value[i][moment(_d).unix()];
+            this.tagData.splice(i,1)
+            return returnValue;
+            break;
+          }
+        }
+      }
+      return null;
+    },
     getHighlights (item, value) {
       let highlight = this.highlight;
       if (!highlight || typeof highlight !== 'function') return {};
@@ -1014,6 +1032,7 @@ export default {
       return f ? this.selectedDate.format(f) : '';
     },
     month () {
+      let _this = this;
       if (!this.hasStep('d')) return [];
       let m = utils.getWeekArray(this.date.clone().set({ hour: 0, minute: 0, second: 0 }), 6);
       let data = [];
@@ -1028,6 +1047,7 @@ export default {
           week.push({
             date: d,
             formatted: d === null ? '' : m.jDate(),
+            tagData: this.checkTagData(d , _this.tagData),
             selected: sel,
             disabled: (
               (this.minDate && m.clone().startOf('day').unix() < min) ||
